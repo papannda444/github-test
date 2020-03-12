@@ -1,0 +1,35 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :release_test do
+    github_release = set_github_release(
+      repository_name: "papannda444/github-test",
+      api_token: ENV["GITHUB_TOKEN"],
+      tag_name: "v1.0.6",
+      name: "",
+      description: "",
+      commitish: "master"
+    )
+  end
+
+  lane :tag_test do
+    add_git_tag(tag: "v1.0.6")
+    push_git_tags
+  end
+end
